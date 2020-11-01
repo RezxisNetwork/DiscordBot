@@ -56,8 +56,9 @@ public class JDAListener implements EventListener {
 							me.getMessage().getTextChannel().sendMessage("認証コードが見つかりませんでした。").queue();
 						} else {
 							player.setDiscordId(me.getAuthor().getIdLong());
+							player.setVerifyCode("");
 							player.update();
-							me.getMessage().getTextChannel().sendMessage(Tables.getUTable().get("`"+player.getUUID()).getName()+"`とリンクされました。").queue();
+							me.getMessage().getTextChannel().sendMessage("`"+Tables.getUTable().get(player.getUUID()).getName()+"`とリンクされました。").queue();
 						}
 					}
 				}
