@@ -6,6 +6,7 @@ import javax.security.auth.login.LoginException;
 
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
+import net.rezxis.mchosting.database.Database;
 import net.rezxis.mchosting.network.WSClient;
 
 public class DiscordBot {
@@ -16,6 +17,7 @@ public class DiscordBot {
 	
 	public static void main(String[] args) {
 		props = new Props("discord.properties");
+		Database.init(props.DB_HOST, props.DB_USER, props.DB_PASS, props.DB_PORT, props.DB_NAME);
 		try {
 			client = new WSClient(new URI("ws://"+props.SYNC_ADDRESS+":"+props.SYNC_PORT),  new WSClientHandler());
 		} catch (Exception ex) {

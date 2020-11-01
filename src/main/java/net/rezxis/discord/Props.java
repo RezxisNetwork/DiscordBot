@@ -16,6 +16,11 @@ public class Props {
 	public final String TOKEN;
 	public final String SYNC_ADDRESS;
 	public final int SYNC_PORT;
+	public final String DB_HOST;
+	public final int DB_PORT;
+	public final String DB_PASS;
+	public final String DB_USER;
+	public final String DB_NAME;
 	
 	final Properties prop=new Properties();
 	public Props(String fname) {
@@ -36,5 +41,10 @@ public class Props {
         this.TOKEN = prop.getProperty("TOKEN");
         this.SYNC_ADDRESS = prop.getProperty("SYNC_ADDRESS");
         this.SYNC_PORT = Integer.valueOf(prop.getProperty("SYNC_PORT"));
+        this.DB_HOST = prop.getProperty("DB_HOST");
+        this.DB_PORT = Integer.valueOf(prop.getProperty("DB_PORT"));
+        this.DB_USER = prop.getProperty("DB_USER");
+        this.DB_PASS = prop.getProperty("DB_PASS");
+        this.DB_NAME = prop.getProperty("DB_NAME");
 	}
 }
