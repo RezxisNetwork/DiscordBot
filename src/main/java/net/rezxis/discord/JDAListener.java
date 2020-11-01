@@ -51,14 +51,19 @@ public class JDAListener implements EventListener {
 					if (msg.split(" ").length != 2) {
 						me.getMessage().getTextChannel().sendMessage("/link <認証コード>").queue();
 					} else {
-						DBPlayer player = Tables.getPTable().getByVerfiyKey(msg.split(" ")[1]);
-						if (player == null) {
-							me.getMessage().getTextChannel().sendMessage("認証コードが見つかりませんでした。").queue();
+						DBPlayer player;
+						if ((player = Tables.getPTable().getByDiscordId(me.getAuthor().getIdLong())) != null) {
+							me.getMessage().getTextChannel().sendMessage("既に`"+Tables.getUTable().get(player.getUUID()).getName()+"`とリンクされています。").queue();
 						} else {
-							player.setDiscordId(me.getAuthor().getIdLong());
-							player.setVerifyCode("");
-							player.update();
-							me.getMessage().getTextChannel().sendMessage("`"+Tables.getUTable().get(player.getUUID()).getName()+"`とリンクされました。").queue();
+							player = Tables.getPTable().getByVerfiyKey(msg.split(" ")[1]);
+							if (player == null) {
+								me.getMessage().getTextChannel().sendMessage("認証コードが見つかりませんでした。").queue();
+							} else {
+								player.setDiscordId(me.getAuthor().getIdLong());
+								player.setVerifyCode("");
+								player.update();
+								me.getMessage().getTextChannel().sendMessage("`"+Tables.getUTable().get(player.getUUID()).getName()+"`とリンクされました。").queue();
+							}
 						}
 					}
 				}
