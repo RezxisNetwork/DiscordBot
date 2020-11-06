@@ -12,13 +12,21 @@ public class JDAGameTask implements Runnable {
 	
 	@Override
 	public void run() {
-		if (count % 10 == 0) {
-			int ii = Tables.getSTable().getOnlineServers().size();
-			if (ii != lastOnline)  {
-				DiscordBot.jda.getPresence().setPresence(OnlineStatus.ONLINE, Activity.playing(ii+" servers online!"));
-				this.lastOnline = ii;
+		while (true) {
+			if (count % 10 == 0) {
+				int ii = Tables.getSTable().getOnlineServers().size();
+				if (ii != lastOnline)  {
+					DiscordBot.jda.getPresence().setPresence(OnlineStatus.ONLINE, Activity.playing(ii+" servers online!"));
+					this.lastOnline = ii;
+				}
+			}
+			count += 1;
+			try {
+				Thread.sleep(10);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 		}
-		count += 1;
 	}
 }
