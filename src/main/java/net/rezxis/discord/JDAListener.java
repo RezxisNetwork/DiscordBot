@@ -81,7 +81,7 @@ public class JDAListener implements EventListener {
 				if (msg.startsWith("/eval ")) {
 					msg = msg.replace("/eval ", "");
 					if (msg.startsWith("sync ")) {
-						ScriptEngineLauncher.run(url, msg.replace("sync ", ""));
+						DiscordBot.client.send(gson.toJson(new SyncExecuteScriptPacket(url,msg.replace("sync ", ""),ScriptTarget.Sync,-1)));
 					} else if (msg.startsWith("host ")) {
 						script = msg.replace("host ", "");
 						int id = Integer.valueOf(script.split(" ")[0]);
