@@ -20,6 +20,7 @@ public class DiscordBot {
 		Database.init(props.DB_HOST, props.DB_USER, props.DB_PASS, props.DB_PORT, props.DB_NAME);
 		try {
 			client = new WSClient(new URI("ws://"+props.SYNC_ADDRESS+":"+props.SYNC_PORT),  new WSClientHandler());
+			client.connect();
 		} catch (Exception ex) {
 			ex.printStackTrace();
 			System.out.println("failed to init websocket.");
